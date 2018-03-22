@@ -12,15 +12,12 @@ public class InterestCalculator {
 		years = Integer.parseInt(JOptionPane.showInputDialog("How Many Years?"));
 		rate = Double.parseDouble(JOptionPane.showInputDialog("Interest Rate?"));
 		amount = Integer.parseInt(JOptionPane.showInputDialog("Whats the Amount?"));
+		double monthlyRate = rate / 12;
+		monthly = amount * (Math.pow(monthlyRate * (1-monthlyRate), years*12)/Math.pow((1 + monthlyRate), years*12) - 1);
+
+		total = monthly * (years * 12);
 		
-		total=amount;
-		rate = rate/100f;
-		for(int i = 1; i <= years; i++) {
-			total += (amount * rate);
-		}
-		
-		
-		monthly = total / (12 * years);
+		//monthly = total / (12 * years);
 		
 		JOptionPane.showMessageDialog(null, "Total = " + total + "\nMonthly = " + monthly);
 		
