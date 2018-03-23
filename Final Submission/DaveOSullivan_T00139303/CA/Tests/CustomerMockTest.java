@@ -24,18 +24,13 @@ public class CustomerMockTest {
     @Test
     public void testLoan() throws Exception {
         Loan mockLoan = EasyMock.createMock(Loan.class);
-        PowerMock.expectNew(Loan.class, 10000, 5).andReturn(mockLoan);
-        expect(mockLoan.getRate()).andReturn(5.0);
-        expect(mockLoan.getMonthlyPayment()).andReturn(118.71);
-        expect(mockLoan.getTotalPayment()).andReturn(11322.74);
+        PowerMock.expectNew(Loan.class, 5000.00, 5).andReturn(mockLoan);
+        expect(mockLoan.getMonthlyPayment()).andReturn(96.66);
         PowerMock.replay(mockLoan, Loan.class);
-        double expectedRate = mockLoan.getRate();
-        double monthly = mockLoan.getMonthlyPayment();
-        double total = mockLoan.getTotalPayment();
-
-        assertEquals(5, expectedRate, 1);
-        assertEquals(188.71, monthly, 1.005);
-        assertEquals(11322.74, total, 1.005);
+        testCustomer.takeoutloan();
+        assertEquals(96.66, testCustomer.getMonthlypayments(), 0.005);
+        assertEquals("Dave O'Sullivan", testCustomer.getName());
+        //assertEquals(5000.00, );
 
         PowerMock.verify(mockLoan, Loan.class);
 
